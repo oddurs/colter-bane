@@ -1,0 +1,353 @@
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  position: relative;
+}
+
+/* Ambient glow — warm light that breathes while music plays */
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    rgba(201, 169, 110, 0.03) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.ambient-glow.playing {
+  opacity: 1;
+  animation: breathe 6s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
+}
+
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 30%,
+    rgba(201, 169, 110, 0.035) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Eyebrow ---
+   Small humanist label above the name. Grounds the hero. */
+.hero-eyebrow {
+  font-family: 'Alegreya SC', serif;
+  font-size: var(--step--2);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+/* --- Artist name --- */
+.artist-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: var(--step-6);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin-bottom: 1.75rem;
+  line-height: 0.9;
+  text-shadow: 0 0 40px rgba(201, 169, 110, 0.08);
+}
+
+/* --- Debut line ---
+   Two-tier hierarchy: the label is small-caps Alegreya SC,
+   the title drops to a larger serif italic on its own line. */
+.debut-line {
+  font-family: 'Alegreya SC', serif;
+  font-size: var(--step--2);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+
+.debut-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: var(--step-2);
+  color: var(--cream-dim);
+  letter-spacing: 0.02em;
+  margin-bottom: 3rem;
+}
+
+/* ============================================
+   SINGLE BLOCK
+   ============================================ */
+.single-block {
+  max-width: 380px;
+  width: 100%;
+}
+
+/* --- Listen links ---
+   Small-caps Alegreya SC. Middot separators. */
+.listen-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.listen-links a {
+  font-family: 'Alegreya SC', serif;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: var(--step--2);
+  letter-spacing: 0.08em;
+  transition: color 0.3s;
+  padding: 0.2rem 0;
+  position: relative;
+}
+
+.listen-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--dusty-gold);
+  transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.listen-links a:hover {
+  color: var(--dusty-gold);
+}
+
+.listen-links a:hover::after {
+  width: 100%;
+}
+
+.listen-links .sep {
+  color: rgba(255, 255, 255, 0.08);
+  user-select: none;
+  font-size: 0.5rem;
+}
+
+/* ============================================
+   SCROLL CUE
+   ============================================ */
+.scroll-cue {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: drift 2.5s ease-in-out infinite;
+}
+
+.scroll-cue svg {
+  width: 14px;
+  height: 14px;
+  color: var(--cream);
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(6px);
+  }
+}
+
+/* ============================================
+   BELOW THE FOLD
+   ============================================ */
+.below {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 6rem 1.5rem 4rem;
+}
+
+/* --- Pull quote ---
+   Large Cormorant italic. The quote mark is positioned
+   absolutely and bleeds above — oversized, barely there. */
+.pull-quote-block {
+  text-align: center;
+  margin-bottom: 5rem;
+  position: relative;
+  padding-top: 2rem;
+}
+
+.pull-quote-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 8rem;
+  line-height: 1;
+  color: var(--dusty-gold);
+  opacity: 0.08;
+  position: absolute;
+  top: -1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  user-select: none;
+  pointer-events: none;
+}
+
+.pull-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: var(--step-3);
+  color: var(--cream-dim);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.pull-quote-source {
+  font-family: 'Alegreya SC', serif;
+  font-size: var(--step--2);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.pull-quote-source::before {
+  content: '— ';
+  letter-spacing: 0;
+}
+
+/* --- Rule --- */
+.rule {
+  width: 2.5rem;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 0 auto 3.5rem;
+}
+
+/* --- Bio ---
+   IBM Plex light, generous line-height for readability.
+   First line of the first paragraph set in Alegreya SC
+   as a quiet typographic wink. */
+.bio {
+  font-size: var(--step-0);
+  line-height: 1.9;
+  color: var(--cream-dim);
+  font-weight: 300;
+}
+
+.bio p + p {
+  margin-top: 1.35rem;
+}
+
+.bio-lead {
+  font-family: 'Alegreya SC', serif;
+  font-weight: 400;
+  font-size: var(--step--1);
+  letter-spacing: 0.03em;
+  color: var(--cream);
+}
+
+/* --- One-liner ---
+   Cormorant italic, large and centered, with thin rules
+   above and below to frame it. */
+.one-liner-block {
+  margin: 4rem 0 0;
+  text-align: center;
+}
+
+.one-liner-rule {
+  width: 2rem;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  margin: 0 auto;
+}
+
+.one-liner {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: var(--step-2);
+  color: var(--cream-mid);
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  padding: 2rem 0;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.site-footer {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+  text-align: center;
+}
+
+.rule-footer {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.04);
+  margin-bottom: 2.5rem;
+}
+
+.contact-label {
+  font-family: 'Alegreya SC', serif;
+  font-size: var(--step--2);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.contact-email {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: var(--step-1);
+  font-weight: 400;
+  color: var(--cream-dim);
+  letter-spacing: 0.01em;
+}
+
+.contact-email a {
+  color: var(--cream-dim);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.contact-email a:hover {
+  color: var(--dusty-gold);
+  border-color: var(--dusty-gold);
+}
+
+.copyright {
+  margin-top: 3rem;
+  font-size: var(--step--2);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.06em;
+}

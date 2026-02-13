@@ -1,0 +1,205 @@
+.vinyl-wrapper {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto 2rem;
+}
+
+/* --- Disc + Sleeve --- */
+.vinyl-stage {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.vinyl-disc {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  transform-origin: center center;
+}
+
+.vinyl-grooves {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.vinyl-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 48%;
+  height: 48%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.vinyl-label img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Light catch ---
+   A conic gradient that stays fixed over the spinning disc,
+   simulating light reflecting off the grooves. */
+.vinyl-light-catch {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 200deg,
+    transparent 0deg,
+    rgba(255, 255, 255, 0.03) 40deg,
+    transparent 80deg,
+    transparent 180deg,
+    rgba(255, 255, 255, 0.02) 220deg,
+    transparent 260deg
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* --- Sleeve --- */
+.vinyl-sleeve {
+  position: relative;
+  z-index: 1;
+  width: 300px;
+  height: 300px;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    0 24px 80px rgba(0, 0, 0, 0.5);
+}
+
+.vinyl-sleeve img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- Controls --- */
+.vinyl-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding: 0 10px;
+}
+
+.play-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 169, 110, 0.25);
+  background: transparent;
+  color: var(--dusty-gold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.25s;
+}
+
+.play-btn:hover {
+  background: var(--dusty-gold);
+  color: var(--dark);
+  border-color: var(--dusty-gold);
+}
+
+.play-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.play-btn:not(.playing) svg {
+  margin-left: 2px;
+}
+
+.progress-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.track-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.track-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--step-0);
+  color: var(--cream-dim);
+  letter-spacing: 0.01em;
+}
+
+.time {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: var(--step--2);
+  font-weight: 300;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+/* expanded touch target */
+.progress-bar::before {
+  content: '';
+  position: absolute;
+  inset: -12px 0;
+}
+
+.progress-bar:focus-visible {
+  outline: 2px solid var(--dusty-gold);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--dusty-gold);
+  border-radius: 2px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 420px) {
+  .vinyl-stage {
+    width: 240px;
+    height: 240px;
+  }
+
+  .vinyl-disc {
+    width: 240px;
+    height: 240px;
+  }
+
+  .vinyl-sleeve {
+    width: 240px;
+    height: 240px;
+  }
+}
