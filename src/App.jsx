@@ -1,69 +1,31 @@
 import { useRef, useState } from 'react'
-import { motion, useScroll, useTransform, useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import VinylPlayer from './components/VinylPlayer'
 import './App.css'
 
 /* ---- Animation variants ---- */
 const fadeUp = {
-  hidden: { opacity: 0, y: 10 },
+  hidden: { opacity: 0, y: 4 },
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: i * 0.08 },
+    transition: { duration: 0.9, ease: [0.25, 0.1, 0.25, 1], delay: i * 0.06 },
   }),
 }
 
 const stagger = {
-  visible: { transition: { staggerChildren: 0.1 } },
-}
-
-const letterVariants = {
-  hidden: { opacity: 0, y: 6 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.25, 0.1, 0.25, 1],
-      delay: 0.2 + i * 0.025,
-    },
-  }),
+  visible: { transition: { staggerChildren: 0.08 } },
 }
 
 const ruleVariants = {
   hidden: { scaleX: 0 },
   visible: {
     scaleX: 1,
-    transition: { duration: 1, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { duration: 1.2, ease: [0.25, 0.1, 0.25, 1] },
   },
 }
 
 /* ---- Components ---- */
-function SplitText({ text, className }) {
-  return (
-    <motion.h1
-      className={className}
-      aria-label={text}
-      variants={fadeUp}
-      initial="hidden"
-      animate="visible"
-    >
-      {text.split('').map((char, i) => (
-        <motion.span
-          key={i}
-          variants={letterVariants}
-          custom={i}
-          initial="hidden"
-          animate="visible"
-          style={{ display: 'inline-block' }}
-          aria-hidden="true"
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </motion.span>
-      ))}
-    </motion.h1>
-  )
-}
 
 function FadeInSection({ children, className, delay = 0 }) {
   const ref = useRef(null)
@@ -105,9 +67,6 @@ export default function App() {
   const [currentTime, setCurrentTime] = useState('0:00')
   const heroRef = useRef(null)
 
-  const { scrollYProgress } = useScroll()
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0])
-  const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.99])
 
   function formatTime(s) {
     const m = Math.floor(s / 60)
@@ -171,11 +130,7 @@ export default function App() {
       <div className={`ambient-glow ${isPlaying ? 'playing' : ''}`} />
 
       {/* ====== HERO ====== */}
-      <motion.section
-        ref={heroRef}
-        style={{ opacity: heroOpacity, scale: heroScale }}
-        className="hero"
-      >
+      <section ref={heroRef} className="hero">
         <div className="hero-glow" />
 
         <motion.div
@@ -187,7 +142,7 @@ export default function App() {
           <motion.p variants={fadeUp} className="hero-eyebrow">
             Brooklyn via Eastern Kentucky
           </motion.p>
-          <SplitText text="Colter Bane" className="artist-name" />
+          <motion.h1 variants={fadeUp} className="artist-name">Colter Bane</motion.h1>
 
           <motion.p variants={fadeUp} className="debut-line">
             Debut single
@@ -223,14 +178,14 @@ export default function App() {
         <motion.div
           className="scroll-cue"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.15 }}
-          transition={{ delay: 2.5, duration: 1.2 }}
+          animate={{ opacity: 0.12 }}
+          transition={{ delay: 3, duration: 2 }}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M12 5v14M5 12l7 7 7-7" />
           </svg>
         </motion.div>
-      </motion.section>
+      </section>
 
       {/* ====== BELOW THE FOLD ====== */}
       <section className="below">
